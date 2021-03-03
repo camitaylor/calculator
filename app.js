@@ -4,13 +4,13 @@ class Calculator {
         this.currentOperandTextElement = currentOperandTextElement
         this.clear()
     }
-
+    //Clears the 
     clear() {
         this.currentOperand = ''
         this.previousOperand = ''
         this.operation = undefined
     }
-
+    // Deletes last number
     delete() {
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
     }
@@ -19,7 +19,7 @@ class Calculator {
         if (number === '.' && this.currentOperand.includes('.')) return
         this.currentOperand = this.currentOperand.toString() + number.toString()
     }
-
+    //
     chooseOperation(operation) {
         if (this.currentOperand === '') return
         if (this.previousOperand != '') {
@@ -29,7 +29,7 @@ class Calculator {
         this.previousOperand = this.currentOperand
         this.currentOperand = ''
     }
-
+    // Calculates the numbers
     compute() {
         let computation
         const prev = parseFloat(this.previousOperand)
@@ -55,11 +55,11 @@ class Calculator {
         this.operation = undefined
         this.previousOperand = ''
     }
-
+    // Displays numbers with decimals
     getDisplayNumber(number) {
         const stringNumber = number.toString()
         const integerDigits = parseFloat(stringNumber.split('.')[0])
-        const decimalDigits = stringNumber.slpit('.')[1]
+        const decimalDigits = stringNumber.split('.')[1]
         let integerDisplay
         if (isNaN(integerDigits)) {
             integerDisplay = ''
@@ -73,7 +73,7 @@ class Calculator {
             return integerDisplay 
         }
     }
-
+    // Updates the display when buttons are pressed
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
@@ -94,14 +94,14 @@ const previousOperandTextElement = document.querySelector('[data-previous-operan
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
 
 const calculator = new Calculator(previousOperandTextElement,currentOperandTextElement)
-
+// Displays number when pressed
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.innerText)
         calculator.updateDisplay()
     })
 })
-
+// Displays operation buttons when pressed
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.chooseOperation(button.innerText)
